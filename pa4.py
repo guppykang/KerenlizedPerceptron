@@ -65,7 +65,7 @@ trainLabels = []
 
 loadData('pa4train.txt', trainFeatures, trainLabels)
 
-#train on substrings of size 3
+#train on substrings of size 5
 classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 5)
 accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 5)
 
