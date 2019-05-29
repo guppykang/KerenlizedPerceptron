@@ -20,7 +20,7 @@ def loadData(fileName, features=[], labels=[]):
 
 def kernelFunction(first, second, p):
     count = 0 
-    for start in range(0, len(first) - p + 1):
+    for start in range(0, len(first) - p + 2):
         v = first[start : start + p]
         count += second.count(v) 
         
@@ -37,10 +37,11 @@ def predict(testX, misClassified, p):
 def kernenlizedPerceptron(trainingSet, trainingLabels, p):
     w = []
     for i in range(len(trainingSet)):
-        print('hi mom')
-        print(w)
+        # print('hi mom')
+        # for item in w: 
+        #     print(trainingSet.index(item[0]))
         if int(trainingLabels[i]) * predict(trainingSet[i], w, p) <= 0: 
-            w.append([i, trainingLabels[i]])
+            w.append([trainingSet[i], trainingLabels[i]])
 
     return w
 
@@ -65,10 +66,16 @@ trainLabels = []
 
 loadData('pa4train.txt', trainFeatures, trainLabels)
 
-#train on substrings of size 5
-classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 5)
-accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 5)
+print("p = 2: ")
+classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 2)
+accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 2)
 print(accuracy)
+
+# #train on substrings of size 5
+# print("p = 5: ")
+# classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 5)
+# accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 5)
+# print(accuracy)
 
 
 
