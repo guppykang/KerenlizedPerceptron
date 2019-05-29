@@ -20,9 +20,9 @@ def loadData(fileName, features=[], labels=[]):
 
 def kernelFunction(first, second, p):
     count = 0 
-    for start in range(0, len(first) - p):
-        v = first[start : p - 1]
-        count += second.count(v)
+    for start in range(0, len(first) - p + 1):
+        v = first[start : start + p]
+        count += second.count(v) 
         
     return count
 
@@ -68,6 +68,7 @@ loadData('pa4train.txt', trainFeatures, trainLabels)
 #train on substrings of size 5
 classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 5)
 accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 5)
+print(accuracy)
 
 
 
