@@ -91,7 +91,7 @@ def getAccuracy(w, testingSet, testingLabels, p, isUnique):
     numCorrect = 0
     for i in range(len(testingSet)):
         print('')
-        print('Testing ROUND : ' + str(i) + ' OF ' + str(len(trainingSet)))
+        print('Testing ROUND : ' + str(i) + ' OF ' + str(len(testingSet)))
 
         prediction = predict(testingSet[i], w, p, isUnique) 
         if int(prediction) == testingLabels[i]:
