@@ -117,9 +117,34 @@ loadData('pa4train.txt', trainFeatures, trainLabels)
 # accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 2, False)
 # print(accuracy)
 
-print("p = 2: ")
-classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 2, True)
-accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 2, True)
+print("p = 3: ")
+classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 3, True)
+accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 3, True)
+print(accuracy)
+
+print("p = 4: ")
+classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 4, True)
+accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 4, True)
+print(accuracy)
+
+print("p = 5: ")
+classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 5, True)
+accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 5, True)
+print(accuracy)
+
+print("p = 3: ")
+classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 3, False)
+accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 3, False)
+print(accuracy)
+
+print("p = 4: ")
+classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 4, False)
+accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 4, False)
+print(accuracy)
+
+print("p = 5: ")
+classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 5, False)
+accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 5, False)
 print(accuracy)
 
 
