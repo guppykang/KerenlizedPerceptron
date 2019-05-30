@@ -108,8 +108,11 @@ def getAccuracy(w, testingSet, testingLabels, p, isUnique):
 #main
 trainFeatures = []
 trainLabels = []
+testingFeatures = []
+testingLabels = []
 
 loadData('pa4train.txt', trainFeatures, trainLabels)
+loadData('pa4test.txt', testingFeatures, testingLabels)
 #loadData('testing.txt', trainFeatures, trainLabels)
 
 
@@ -121,31 +124,44 @@ loadData('pa4train.txt', trainFeatures, trainLabels)
 print("p = 3: ")
 classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 3, True)
 accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 3, True)
-print(accuracy)
+print('training : ' + str(accuracy))
+accuracy = getAccuracy(classifier, testingFeatures, testingLabels, 3, True)
+print('testing : ' + str(accuracy))
+
 
 print("p = 4: ")
 classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 4, True)
 accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 4, True)
-print(accuracy)
+print('training : ' + str(accuracy))
+accuracy = getAccuracy(classifier, testingFeatures, testingLabels, 4, True)
+print('testing : ' + str(accuracy))
+
 
 print("p = 5: ")
 classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 5, True)
 accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 5, True)
-print(accuracy)
+print('training : ' + str(accuracy))
+accuracy = getAccuracy(classifier, testingFeatures, testingLabels, 5, True)
+print('testing : ' + str(accuracy))
 
 print("p = 3: ")
 classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 3, False)
 accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 3, False)
-print(accuracy)
+print('training : ' + str(accuracy))
+accuracy = getAccuracy(classifier, testingFeatures, testingLabels, 3, False)
+print('testing : ' + str(accuracy))
 
 print("p = 4: ")
 classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 4, False)
 accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 4, False)
-print(accuracy)
+print('training : ' + str(accuracy))
+accuracy = getAccuracy(classifier, testingFeatures, testingLabels, 4, False)
+print('testing : ' + str(accuracy))
 
 print("p = 5: ")
 classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 5, False)
 accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 5, False)
-print(accuracy)
-
+print('training : ' + str(accuracy))
+accuracy = getAccuracy(classifier, testingFeatures, testingLabels, 5, False)
+print('testing : ' + str(accuracy))
 
