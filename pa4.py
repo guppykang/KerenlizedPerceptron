@@ -18,12 +18,28 @@ def loadData(fileName, features=[], labels=[]):
             labels.append(-1)
 
 
+# def kernelFunction(first, second, p):
+#     count = 0 
+#     for start in range(0, len(first) - p + 1):
+#         v = first[start : start + p]
+#         #print('count of ' + str(v) + ' ' + str(second.count(v)))
+#         count += second.count(v) 
+        
+#     #print('count : ' + str(count))
+#     return count
+
+
 def kernelFunction(first, second, p):
     count = 0 
-    for start in range(0, len(first) - p + 2):
-        v = first[start : start + p]
-        count += second.count(v) 
+    substringsInSecond = []
+    for start in range(0, len(second) - p + 1):
+        v = second[start : start + p]
+        substringsInSecond.append(v)
         
+    for start in range(0, len(first) - p + 1):
+        v = first[start : start + p]
+        count += substringsInSecond.count(v) 
+    
     return count
 
 
@@ -37,9 +53,9 @@ def predict(testX, misClassified, p):
 def kernenlizedPerceptron(trainingSet, trainingLabels, p):
     w = []
     for i in range(len(trainingSet)):
-        # print('hi mom')
-        # for item in w: 
-        #     print(trainingSet.index(item[0]))
+        print('hi mom')
+        for item in w: 
+            print(trainingSet.index(item[0]))
         if int(trainingLabels[i]) * predict(trainingSet[i], w, p) <= 0: 
             w.append([trainingSet[i], trainingLabels[i]])
 
@@ -65,6 +81,8 @@ trainFeatures = []
 trainLabels = []
 
 loadData('pa4train.txt', trainFeatures, trainLabels)
+#loadData('testing.txt', trainFeatures, trainLabels)
+
 
 print("p = 2: ")
 classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 2)
