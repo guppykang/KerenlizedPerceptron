@@ -18,17 +18,6 @@ def loadData(fileName, features=[], labels=[]):
             labels.append(-1)
 
 
-# def kernelFunction(first, second, p):
-#     count = 0 
-#     for start in range(0, len(first) - p + 1):
-#         v = first[start : start + p]
-#         #print('count of ' + str(v) + ' ' + str(second.count(v)))
-#         count += second.count(v) 
-        
-#     #print('count : ' + str(count))
-#     return count
-
-
 def kernelFunction(first, second, p):
     count = 0 
     substringsInSecond = []
@@ -42,30 +31,69 @@ def kernelFunction(first, second, p):
     
     return count
 
+def uniqueKernelFunction(first, second, p):
 
-def predict(testX, misClassified, p): 
+    count = 0 
+    substringsInSecond = []
+    for start in range(0, len(second) - p + 1):
+        v = second[start : start + p]
+        substringsInSecond.append(v)
+        
+    #print('substrings in second : ' + str(substringsInSecond))
+
+    uniqueSubstringsInFirst = []
+    for start in range(0, len(first) - p + 1):
+        v = first[start : start + p]
+        if v not in uniqueSubstringsInFirst: 
+            # print('in here')
+
+            #print('count for  ' + v  + ' ' + str(substringsInSecond.count(v)))
+            count += substringsInSecond.count(v) 
+            uniqueSubstringsInFirst.append(v)
+    
+    #print('total count : '+ str(count))
+    return count
+
+def predict(testX, misClassified, p, isUnique): 
     sum = 0
+    
     for wrong in misClassified: 
-        sum += wrong[1] * kernelFunction(str(testX), str(wrong[0]), p)
+        if isUnique: 
+            sum += wrong[1] * uniqueKernelFunction(str(testX), str(wrong[0]), p)
+        elif not isUnique: 
+            sum += wrong[1] * kernelFunction(str(testX), str(wrong[0]), p)
     return numpy.sign(sum)
 
 
-def kernenlizedPerceptron(trainingSet, trainingLabels, p):
+def kernenlizedPerceptron(trainingSet, trainingLabels, p, isUnique):
     w = []
+
+    #print(trainingSet)
+    #print(trainingLabels)
+
     for i in range(len(trainingSet)):
-        print('hi mom')
-        for item in w: 
-            print(trainingSet.index(item[0]))
-        if int(trainingLabels[i]) * predict(trainingSet[i], w, p) <= 0: 
+        print('')
+        print('ROUND : ' + str(i) + ' OF ' + str(len(trainingSet)))
+        # for item in w: 
+        #     print(trainingSet.index(item[0]))
+
+        prediction = predict(trainingSet[i], w, p, isUnique)
+        #print('prediction : ' + str(prediction) + '. acutal : ' + str(trainingLabels[i]))
+        if int(trainingLabels[i]) * prediction <= 0: 
+            #print('incorrect')
             w.append([trainingSet[i], trainingLabels[i]])
+        #print('hi mom')
 
     return w
 
 
-def getAccuracy(w, testingSet, testingLabels, p):
+def getAccuracy(w, testingSet, testingLabels, p, isUnique):
     numCorrect = 0
     for i in range(len(testingSet)):
-        prediction = predict(testingSet[i], w, p) 
+        print('')
+        print('Testing ROUND : ' + str(i) + ' OF ' + str(len(trainingSet)))
+
+        prediction = predict(testingSet[i], w, p, isUnique) 
         if int(prediction) == testingLabels[i]:
             numCorrect += 1
         if int(prediction) == 0: 
@@ -84,16 +112,14 @@ loadData('pa4train.txt', trainFeatures, trainLabels)
 #loadData('testing.txt', trainFeatures, trainLabels)
 
 
-print("p = 2: ")
-classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 2)
-accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 2)
-print(accuracy)
-
-# #train on substrings of size 5
-# print("p = 5: ")
-# classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 5)
-# accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 5)
+# print("p = 2: ")
+# classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 2, False)
+# accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 2, False)
 # print(accuracy)
 
+print("p = 2: ")
+classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 2, True)
+accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 2, True)
+print(accuracy)
 
 
