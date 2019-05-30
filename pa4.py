@@ -72,8 +72,8 @@ def kernenlizedPerceptron(trainingSet, trainingLabels, p, isUnique):
     #print(trainingLabels)
 
     for i in range(len(trainingSet)):
-        print('')
-        print('ROUND : ' + str(i) + ' OF ' + str(len(trainingSet)))
+        # print('')
+        # print('ROUND : ' + str(i) + ' OF ' + str(len(trainingSet)))
         # for item in w: 
         #     print(trainingSet.index(item[0]))
 
@@ -90,8 +90,8 @@ def kernenlizedPerceptron(trainingSet, trainingLabels, p, isUnique):
 def getAccuracy(w, testingSet, testingLabels, p, isUnique):
     numCorrect = 0
     for i in range(len(testingSet)):
-        print('')
-        print('Testing ROUND : ' + str(i) + ' OF ' + str(len(testingSet)))
+        # print('')
+        # print('Testing ROUND : ' + str(i) + ' OF ' + str(len(testingSet)))
 
         prediction = predict(testingSet[i], w, p, isUnique) 
         if int(prediction) == testingLabels[i]:
