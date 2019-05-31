@@ -29,6 +29,7 @@ def kernelFunction(first, second, p):
         v = first[start : start + p]
         count += substringsInSecond.count(v) 
     
+    #print('total count' + str(count))
     return count
 
 def uniqueKernelFunction(first, second, p):
@@ -73,8 +74,8 @@ def kernenlizedPerceptron(trainingSet, trainingLabels, p, isUnique):
     #print(trainingLabels)
 
     for i in range(len(trainingSet)):
-        # print('')
-        # print('ROUND : ' + str(i) + ' OF ' + str(len(trainingSet)))
+        print('')
+        print('ROUND : ' + str(i) + ' OF ' + str(len(trainingSet)))
         # for item in w: 
         #     print(trainingSet.index(item[0]))
 
@@ -91,8 +92,8 @@ def kernenlizedPerceptron(trainingSet, trainingLabels, p, isUnique):
 def getAccuracy(w, testingSet, testingLabels, p, isUnique):
     numCorrect = 0
     for i in range(len(testingSet)):
-        # print('')
-        # print('Testing ROUND : ' + str(i) + ' OF ' + str(len(testingSet)))
+        print('')
+        print('Testing ROUND : ' + str(i) + ' OF ' + str(len(testingSet)))
 
         prediction = predict(testingSet[i], w, p, isUnique) 
         if int(prediction) == testingLabels[i]:
@@ -116,10 +117,10 @@ loadData('pa4test.txt', testingFeatures, testingLabels)
 #loadData('testing.txt', trainFeatures, trainLabels)
 
 
-# print("p = 2: ")
-# classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 2, True)
-# accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 2, True)
-# print(accuracy)
+print("p = 2: ")
+classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 2, True)
+accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 2, True)
+print(accuracy)
 
 print("p = 3: ")
 classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 3, True)
@@ -136,9 +137,31 @@ print('training : ' + str(accuracy))
 accuracy = getAccuracy(classifier, testingFeatures, testingLabels, 4, True)
 print('testing : ' + str(accuracy))
 
-
+#hi mom
 print("p = 5: ")
 classifier = kernenlizedPerceptron(trainFeatures, trainLabels, 5, True)
+
+#get the top two 
+p = 5
+substrings = []
+for m, label in fiveClassifier: 
+    subs = [m[i:i+p] for i in range(len(m)-p+1)]
+    substrings += subs
+
+substrings = list(set(substrings))
+
+maxList = []
+
+for s in substrings: 
+    value = 0
+    for m, label in fiveClassifier:
+        substrings_m = [m[i:i+p]for i in range(len(m) -p +1)]
+        value += substrings_m.count(s) * int(label)
+    maxList.append((s,value))
+maxList.sort(key = lambda tup: tup[1])
+
+
+
 accuracy = getAccuracy(classifier, trainFeatures, trainLabels, 5, True)
 print('training : ' + str(accuracy))
 accuracy = getAccuracy(classifier, testingFeatures, testingLabels, 5, True)
